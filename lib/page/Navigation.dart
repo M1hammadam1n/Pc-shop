@@ -29,9 +29,9 @@ class _MainNavigationPageState extends State<Navigation> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 28, 3, 102),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
+        backgroundColor: Colors.black, 
+        selectedItemColor: Colors.purpleAccent, 
+        unselectedItemColor: Colors.white70, 
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
@@ -49,9 +49,8 @@ class _MainNavigationPageState extends State<Navigation> {
           ),
         ],
         type: BottomNavigationBarType.fixed,
+        elevation: 10,
       ),
     );
   }
 }
-
-

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:pc_shop/auth/service/product.dart';
+import 'package:pc_shop/page/Call_Button.dart';
+import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final Product product;
@@ -15,12 +16,12 @@ class ProductDetailPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(
-          color: Colors.white, // ← цвет иконки "назад"
+          color: Colors.white,
         ),
         title: Text(
           product.title,
           style: TextStyle(
-            color: Colors.white, // ← цвет заголовка AppBar
+            color: Colors.white, 
           ),
         ),
       ),
@@ -65,19 +66,7 @@ class ProductDetailPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // TODO: действие при покупке
-                    },
-                    child: const Text('Купить'),
-                  ),
-                  const SizedBox(width: 40),
-                  ElevatedButton(
-                    onPressed: () {
-                      // TODO: действие при покупке
-                    },
-                    child: const Text('phone number'),
-                  ),
+                  CallButton(),
                 ],
               ),
             ),
