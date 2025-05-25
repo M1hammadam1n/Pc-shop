@@ -1,3 +1,6 @@
+# Скрыть файл с переменными окружения
+.env
+
 # Miscellaneous
 *.class
 *.log
