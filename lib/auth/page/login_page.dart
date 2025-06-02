@@ -10,168 +10,148 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // get auth service
   final authService = AuthService();
 
-  // text controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  // variable for animation effect
   bool _isPressed = false;
 
-  // login button pressed
   void login() async {
-    // prepare data
     final email = _emailController.text;
     final password = _passwordController.text;
 
-    // attempt login
     try {
       await authService.signInWithEmailPassword(email, password);
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Error: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Ошибка: $e')),
+        );
       }
     }
   }
 
-  // Build UI
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final horizontalPadding = size.width * 0.06;
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(36, 18, 0, 78),
+      backgroundColor: const Color.fromARGB(255, 20, 0, 60), // насыщенный темно-фиолетовый
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(36, 18, 0, 78),
-        title: const Text('Login', style: TextStyle(color: Colors.white70)),
+        backgroundColor: const Color.fromARGB(255, 40, 0, 80),
+        iconTheme: const IconThemeData(color: Colors.white70),
+        elevation: 0,
+        title: const Text(
+          'Вход',
+          style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
+        ),
       ),
       body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 24),
         children: [
-          SizedBox(height: 20),
+          SizedBox(height: size.height * 0.02),
           TextField(
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
+            style: const TextStyle(color: Colors.white70),
             decoration: InputDecoration(
-              labelText: "Email",
-              prefixIcon: const Icon(Icons.email),
+              labelText: "Электронная почта",
+              labelStyle: const TextStyle(color: Colors.white54),
+              prefixIcon: const Icon(Icons.email, color: Colors.white54),
               filled: true,
-              fillColor: Colors.white.withOpacity(0.1),
+              fillColor: Colors.white.withOpacity(0.12),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Colors.white70),
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide.none,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Colors.white24),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: const BorderSide(color: Color.fromARGB(255, 130, 80, 255), width: 2),
               ),
-              labelStyle: const TextStyle(color: Colors.white70),
             ),
-            style: const TextStyle(color: Colors.white),
           ),
-          const SizedBox(height: 20),
-
-          // Password
+          SizedBox(height: size.height * 0.025),
           TextField(
             controller: _passwordController,
             obscureText: true,
+            style: const TextStyle(color: Colors.white70),
             decoration: InputDecoration(
-              labelText: "Password",
-              prefixIcon: const Icon(Icons.lock),
+              labelText: "Пароль",
+              labelStyle: const TextStyle(color: Colors.white54),
+              prefixIcon: const Icon(Icons.lock, color: Colors.white54),
               filled: true,
-              fillColor: Colors.white.withOpacity(0.1),
+              fillColor: Colors.white.withOpacity(0.12),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Colors.white70),
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide.none,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Colors.white24),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: const BorderSide(color: Color.fromARGB(255, 130, 80, 255), width: 2),
               ),
-              labelStyle: const TextStyle(color: Colors.white70),
             ),
-            style: const TextStyle(color: Colors.white),
           ),
-          SizedBox(height: 20),
-          // Button with animation and style
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: AnimatedScale(
-              scale: _isPressed ? 0.95 : 1.0,
-              duration: const Duration(milliseconds: 100),
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _isPressed = true;
-                  });
-                  Future.delayed(const Duration(milliseconds: 100), () {
-                    setState(() {
-                      _isPressed = false;
-                    });
-                    login(); // Call login method
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueGrey[200], // Button color
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 16,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30), // Rounded corners
-                  ),
-                  elevation: 8, // Shadow
-                  shadowColor: Colors.blueAccent.withOpacity(0.4),
-                ),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                    color: Colors.black,
-                  ),
+          SizedBox(height: size.height * 0.04),
+          AnimatedScale(
+            scale: _isPressed ? 0.95 : 1.0,
+            duration: const Duration(milliseconds: 100),
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() => _isPressed = true);
+                Future.delayed(const Duration(milliseconds: 100), () {
+                  setState(() => _isPressed = false);
+                  login();
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 130, 80, 255),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                elevation: 12,
+                shadowColor: const Color.fromARGB(150, 130, 80, 255),
+              ),
+              child: const Text(
+                'Войти',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.3,
                 ),
               ),
             ),
           ),
-
-          // Gesture to go to register page
-          SizedBox(height: 20),
+          SizedBox(height: size.height * 0.03),
           Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterPage(),
-                    ),
-                  );
-                },
-                borderRadius: BorderRadius.circular(8),
-                splashColor: Colors.white24,
-                child: RichText(
-                  text: const TextSpan(
-                    text: "Don't have an account? ",
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
-                    children: [
-                      TextSpan(
-                        text: "Sign Up",
-                        style: TextStyle(
-                          color: Colors.lightBlueAccent,
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                        ),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const RegisterPage()),
+                );
+              },
+              borderRadius: BorderRadius.circular(8),
+              splashColor: Colors.white24,
+              child: const Text.rich(
+                TextSpan(
+                  text: "Нет аккаунта? ",
+                  style: TextStyle(color: Colors.white54, fontSize: 15),
+                  children: [
+                    TextSpan(
+                      text: "Зарегистрироваться",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 130, 80, 255),
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );

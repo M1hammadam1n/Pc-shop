@@ -1,16 +1,27 @@
 # pc_shop
 
-A new Flutter project.
+Приложение интернет-магазина на Flutter.
 
-## Getting Started
+## О проекте
 
-This project is a starting point for a Flutter application.
+Это приложение предназначено для интернет-магазинов, предоставляя пользователям удобный интерфейс для просмотра продукции магазина, ознакомления с политикой магазина, а также для получения контактных данных продавца. Приложение облегчает связь с продавцом и помогает покупателям быстро найти нужную информацию.
 
-A few resources to get you started if this is your first Flutter project:
+## Возможности
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Просмотр каталога товаров
+- Ознакомление с политикой магазина (доставка, возврат и т.п.)
+- Контактная информация для связи с продавцом
+- Удобный и современный дизайн с тёмной темой и акцентами в фиолетовом цвете
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Начало работы
+
+Если вы впервые работаете с Flutter, рекомендуем ознакомиться с официальной документацией и руководствами:
+
+- [Lab: Напишите своё первое приложение на Flutter](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Полезные примеры Flutter](https://docs.flutter.dev/cookbook)
+
+Для получения помощи и дополнительной информации по разработке на Flutter посетите [официальную документацию Flutter](https://docs.flutter.dev/).
+
+---
+
+Будем рады вашим вопросам и предложениям!

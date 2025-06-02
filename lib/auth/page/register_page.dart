@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Passwords don't match")),
+        const SnackBar(content: Text("Пароли не совпадают")),
       );
       return;
     }
@@ -35,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
+          SnackBar(content: Text('Ошибка: $e')),
         );
       }
     }
@@ -43,108 +43,111 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final horizontalPadding = size.width * 0.06;
+    final verticalSpacing = size.height * 0.025;
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(36, 18, 0, 78),
+      backgroundColor: const Color.fromARGB(255, 20, 0, 60), // темно-фиолетовый фон
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(36, 18, 0, 78),
-        title: const Text('Sign Up', style: TextStyle(color: Colors.white70)),
+        backgroundColor: const Color.fromARGB(255, 40, 0, 80),
+        iconTheme: const IconThemeData(color: Colors.white70),
+        elevation: 0,
+        title: const Text(
+          'Регистрация',
+          style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w600),
+        ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 20),
         children: [
-          const SizedBox(height: 20),
-          TextField(
+          SizedBox(height: verticalSpacing),
+          _buildTextField(
             controller: _emailController,
+            label: "Электронная почта",
+            icon: Icons.email,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              labelText: "Email",
-              prefixIcon: const Icon(Icons.email),
-              filled: true,
-              fillColor: Colors.white.withOpacity(0.1),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Colors.white24),
-              ),
-              labelStyle: const TextStyle(color: Colors.white70),
-            ),
-            style: const TextStyle(color: Colors.white),
           ),
-          const SizedBox(height: 20),
-          TextField(
+          SizedBox(height: verticalSpacing),
+          _buildTextField(
             controller: _passwordController,
+            label: "Пароль",
+            icon: Icons.lock,
             obscureText: true,
-            decoration: InputDecoration(
-              labelText: "Password",
-              prefixIcon: const Icon(Icons.lock),
-              filled: true,
-              fillColor: Colors.white.withOpacity(0.1),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Colors.white24),
-              ),
-              labelStyle: const TextStyle(color: Colors.white70),
-            ),
-            style: const TextStyle(color: Colors.white),
           ),
-          const SizedBox(height: 20),
-          TextField(
+          SizedBox(height: verticalSpacing),
+          _buildTextField(
             controller: _confirmPasswordController,
+            label: "Повторите пароль",
+            icon: Icons.lock_outline,
             obscureText: true,
-            decoration: InputDecoration(
-              labelText: "Confirm Password",
-              prefixIcon: const Icon(Icons.lock_outline),
-              filled: true,
-              fillColor: Colors.white.withOpacity(0.1),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Colors.white24),
-              ),
-              labelStyle: const TextStyle(color: Colors.white70),
-            ),
-            style: const TextStyle(color: Colors.white),
           ),
-          const SizedBox(height: 30),
+          SizedBox(height: verticalSpacing * 1.5),
           AnimatedScale(
             scale: _isPressed ? 0.95 : 1.0,
             duration: const Duration(milliseconds: 100),
-            child: ElevatedButton(
-              onPressed: () {
-                setState(() => _isPressed = true);
-                Future.delayed(const Duration(milliseconds: 100), () {
-                  setState(() => _isPressed = false);
-                  signup();
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey[200],
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() => _isPressed = true);
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    setState(() => _isPressed = false);
+                    signup();
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 130, 80, 255),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  elevation: 12,
+                  shadowColor: const Color.fromARGB(150, 130, 80, 255),
                 ),
-                elevation: 8,
-                shadowColor: Colors.blueAccent.withOpacity(0.4),
-              ),
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.2,
-                  color: Colors.black,
+                child: const Text(
+                  'Зарегистрироваться',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.3,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      style: const TextStyle(color: Colors.white70),
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(color: Colors.white54),
+        prefixIcon: Icon(icon, color: Colors.white54),
+        filled: true,
+        fillColor: Colors.white.withOpacity(0.12),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(color: Color.fromARGB(255, 130, 80, 255), width: 2),
+        ),
       ),
     );
   }
