@@ -3,6 +3,7 @@ import 'package:pc_shop/components/Product/Product_Detail_Page.dart';
 import 'package:pc_shop/service/product.dart';
 import 'package:pc_shop/theme/app_theme.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
@@ -49,9 +50,9 @@ class _SearchPageState extends State<SearchPage> {
     final isWide = screenWidth > 600;
 
     return Scaffold(
-      backgroundColor: AppTheme.black70,
+      backgroundColor: AppTheme.black,
       appBar: AppBar(
-        backgroundColor: AppTheme.black70,
+        backgroundColor: AppTheme.black,
         title: const Text("Поиск", style: TextStyle(color: AppTheme.white)),
         elevation: 0,
       ),
@@ -68,12 +69,15 @@ class _SearchPageState extends State<SearchPage> {
                       hintText: 'Введите название товара',
                       hintStyle: const TextStyle(color: AppTheme.white54),
                       filled: true,
-                      fillColor: AppTheme.black80,
+                      fillColor: AppTheme.black90,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide.none,
                       ),
-                      prefixIcon: const Icon(Icons.search, color: AppTheme.purpleAccent),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: AppTheme.purpleAccent,
+                      ),
                     ),
                     onChanged: (value) {
                       query = value;
@@ -87,18 +91,26 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 if (isLoading)
                   const Center(
-                      child: CircularProgressIndicator(color: AppTheme.purple))
+                    child: CircularProgressIndicator(color: AppTheme.purple),
+                  )
                 else if (searchResults.isEmpty && query.isNotEmpty)
                   const Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: Text("Ничего не найдено",
-                        style: TextStyle(color: AppTheme.white70)),
+                    child: Text(
+                      "Ничего не найдено",
+                      style: TextStyle(color: AppTheme.white70),
+                    ),
                   )
                 else if (searchResults.isEmpty && query.isEmpty)
                   const Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: Text("Введите название товара для поиска",
-                        style: TextStyle(color: AppTheme.white54, fontStyle: FontStyle.italic)),
+                    child: Text(
+                      "Введите название товара для поиска",
+                      style: TextStyle(
+                        color: AppTheme.white54,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
                   )
                 else
                   Expanded(
@@ -110,7 +122,10 @@ class _SearchPageState extends State<SearchPage> {
                             'https://ekwknddvmbdzskwytrdm.supabase.co/storage/v1/object/public/images/${product.imagePath}';
 
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12),
                             splashColor: AppTheme.purple.withOpacity(0.3),
@@ -126,10 +141,12 @@ class _SearchPageState extends State<SearchPage> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: const Color(0xFF2A2A2A), 
+                                color: AppTheme.black90,
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                    color: AppTheme.purpleAccent, width: 1.5),
+                                  color: AppTheme.purpleAccent,
+                                  width: 1.5,
+                                ),
                                 boxShadow: [
                                   BoxShadow(
                                     color: AppTheme.purple.withOpacity(0.5),
@@ -151,9 +168,11 @@ class _SearchPageState extends State<SearchPage> {
                                       return Container(
                                         width: isWide ? 80 : 60,
                                         height: isWide ? 80 : 60,
-                                        color: AppTheme.gray,
-                                        child: const Icon(Icons.broken_image,
-                                            color: AppTheme.White30),
+                                        color: AppTheme.black90,
+                                        child: const Icon(
+                                          Icons.broken_image,
+                                          color: AppTheme.White30,
+                                        ),
                                       );
                                     },
                                   ),
@@ -167,7 +186,7 @@ class _SearchPageState extends State<SearchPage> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  '${product.price} сум',
+                                  '${product.price}',
                                   style: TextStyle(
                                     color: AppTheme.white70,
                                     fontSize: isWide ? 16 : 14,

@@ -15,6 +15,5 @@ class AppTheme {
   static const Color deepPurpleAccent = Color.fromARGB(255, 179, 136, 255);
   static const Color redAccent = Color.fromARGB(255, 255, 82, 82);
   static const Color white54 = Color.fromARGB(137, 255, 255, 255);
-
-  static var white30;
+  static const Color black90 = const Color.fromARGB(255, 15, 15, 15);
 }

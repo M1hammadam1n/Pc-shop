@@ -129,9 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fit: BoxFit.cover,
                         ),
                       ),
-
                       const SizedBox(height: 20),
-
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: ProfileInfoSection(),

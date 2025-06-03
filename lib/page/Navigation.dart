@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pc_shop/page/Home_Page.dart';
 import 'package:pc_shop/page/Search_Page.dart';
 import 'package:pc_shop/page/profile_page.dart';
+import 'package:pc_shop/page/favorite_page.dart'; 
 import 'package:pc_shop/theme/app_theme.dart';
 
 class Navigation extends StatefulWidget {
@@ -17,6 +18,7 @@ class _MainNavigationPageState extends State<Navigation> {
   final List<Widget> _pages = [
     HomePage(),
     SearchPage(),
+    const FavoritePage(),  // <-- добавляем сюда
     ProfilePage(),
   ];
 
@@ -28,9 +30,8 @@ class _MainNavigationPageState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-    // Получаем масштаб экрана
     final screenWidth = MediaQuery.of(context).size.width;
-    final iconSize = screenWidth * 0.065; 
+    final iconSize = screenWidth * 0.065;
 
     return Scaffold(
       body: _pages[_selectedIndex],
@@ -50,6 +51,10 @@ class _MainNavigationPageState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search, size: iconSize),
             label: 'Поиск',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite, size: iconSize),  
+            label: 'Избранное',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person, size: iconSize),

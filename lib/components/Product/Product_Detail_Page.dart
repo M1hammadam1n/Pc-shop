@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pc_shop/components/Call_Button.dart';
 import 'package:pc_shop/service/product.dart';
 import 'package:pc_shop/theme/app_theme.dart';
+import 'package:pc_shop/bloc/Favorite/FavoriteBloc.dart';
+import 'package:pc_shop/bloc/Favorite/FavoriteEvent.dart';
+import 'package:pc_shop/bloc/Favorite/FavoriteState.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final Product product;
@@ -15,7 +19,7 @@ class ProductDetailPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF121212),
+        backgroundColor: AppTheme.black,
         iconTheme: const IconThemeData(
           color: AppTheme.purpleAccent,
         ),
@@ -24,8 +28,31 @@ class ProductDetailPage extends StatelessWidget {
           style: const TextStyle(color: AppTheme.white),
         ),
         elevation: 0,
+        actions: [
+          BlocBuilder<FavoriteBloc, FavoriteState>(
+            builder: (context, state) {
+              final isFavorite = state.favorites.any((p) => p.id == product.id);
+
+              return IconButton(
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.red : AppTheme.purpleAccent,
+                ),
+                onPressed: () {
+                  final bloc = context.read<FavoriteBloc>();
+                  if (isFavorite) {
+                    bloc.add(RemoveFavorite(product));
+                  } else {
+                    bloc.add(AddFavorite(product));
+                  }
+                },
+              );
+            },
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
-      backgroundColor: AppTheme.black70,
+      backgroundColor: AppTheme.black90,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
@@ -71,7 +98,7 @@ class ProductDetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                '${product.price} сум',
+                '${product.price} ',
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -88,7 +115,7 @@ class ProductDetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Center(
-                child: CallButton(),
+                child: CallButton(phoneNumber: '+998903377273'),
               ),
             ],
           ),

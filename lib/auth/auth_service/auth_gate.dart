@@ -21,14 +21,11 @@ class AuthGate extends StatelessWidget {
     return StreamBuilder<AuthState>(
       stream: Supabase.instance.client.auth.onAuthStateChange,
       builder: (context, snapshot) {
-        // Показать индикатор загрузки во время подключения
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
-
-        // Проверить наличие активной сессии
         final session = snapshot.data?.session;
 
         if (session != null) {
