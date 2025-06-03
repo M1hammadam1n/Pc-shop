@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pc_shop/components/Pulsing_Hover_Text.dart';
+import 'package:pc_shop/theme/app_theme.dart';
 
 class ProfileInfoSection extends StatelessWidget {
   const ProfileInfoSection({super.key});
@@ -22,7 +23,7 @@ class ProfileInfoSection extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Colors.white70,
+            color: AppTheme.white70,
           ),
         ),
         SizedBox(height: 8),

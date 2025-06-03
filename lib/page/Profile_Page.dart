@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pc_shop/auth/service/auth_service.dart';
+import 'package:pc_shop/auth/auth_service/auth_service.dart';
 import 'package:pc_shop/components/ProfileInfo_Section.dart';
 import 'package:pc_shop/components/User_Agreement_Page.dart';
+import 'package:pc_shop/theme/app_theme.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -40,15 +41,15 @@ class _ProfilePageState extends State<ProfilePage> {
         authService.getCurrentUserEmail() ?? 'Неизвестный пользователь';
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121212), // темный фон как везде
+      backgroundColor: AppTheme.black70,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF121212),
-        iconTheme: const IconThemeData(color: Colors.purpleAccent),
-        title: const Text("Профиль", style: TextStyle(color: Colors.white)),
+        backgroundColor: AppTheme.black70,
+        iconTheme: const IconThemeData(color: AppTheme.purpleAccent),
+        title: const Text("Профиль", style: TextStyle(color: AppTheme.white)),
         actions: [
           IconButton(
             onPressed: logout,
-            icon: const Icon(Icons.logout_outlined, color: Colors.purpleAccent),
+            icon: const Icon(Icons.logout_outlined, color: AppTheme.purpleAccent),
           ),
         ],
         elevation: 0,
@@ -80,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         backgroundColor: const Color(
                           0xFF2A2A2A,
-                        ), // чтобы был контрастный темный фон у аватара
+                        ),
                       ),
 
                       const SizedBox(height: 20),
@@ -89,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         currentEmail,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppTheme.white,
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                         ),
@@ -101,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purpleAccent,
+                            backgroundColor: AppTheme.purpleAccent,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,
                               vertical: 12,
@@ -113,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: openUserAgreement,
                           child: const Text(
                             'Пользовательское соглашение',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(fontSize: 16, color: AppTheme.black),
                           ),
                         ),
                       ),

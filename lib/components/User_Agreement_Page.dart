@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pc_shop/theme/app_theme.dart';
 
 class UserAgreementPage extends StatelessWidget {
   const UserAgreementPage({super.key});
@@ -23,10 +24,10 @@ class UserAgreementPage extends StatelessWidget {
     final bottomPadding = MediaQuery.of(context).padding.bottom + 16;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121212), // темный фон, как в ProfilePage
+      backgroundColor: AppTheme.black70,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF121212),
-        iconTheme: const IconThemeData(color: Colors.purpleAccent),
+        backgroundColor:  AppTheme.black70,
+        iconTheme: const IconThemeData(color: AppTheme.purpleAccent),
         title: const Text(
           'Пользовательское соглашение',
           style: TextStyle(color: Colors.white),
@@ -94,7 +95,7 @@ class UserAgreementPage extends StatelessWidget {
 Товар оказался бракованным при получении —
 тогда повторная доставка оплачивается нами.
 ''',
-            style: TextStyle(color: Colors.white, fontSize: fontSize, height: 1.5),
+            style: TextStyle(color: AppTheme.white, fontSize: fontSize, height: 1.5),
           ),
         ),
       ),

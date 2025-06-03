@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pc_shop/auth/service/product.dart';
-import 'package:pc_shop/page/Product/product_card.dart';
+import 'package:pc_shop/components/Product/product_card.dart';
+import 'package:pc_shop/service/product.dart';
+import 'package:pc_shop/theme/app_theme.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -23,8 +24,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget shimmerCard() {
     return Shimmer.fromColors(
-      baseColor: const Color(0xFF121212), // тёмно-серый
-      highlightColor: const Color(0xFF1F1F1F), // чуть светлее
+      baseColor: const Color(0xFF121212),
+      highlightColor: const Color(0xFF1F1F1F),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         height: 180,
@@ -39,13 +40,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF000000), // глубокий чёрный
+      backgroundColor: AppTheme.black,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF000000),
+        backgroundColor: AppTheme.black,
         elevation: 0,
         title: const Text(
           "Продукты",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: AppTheme.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               return Center(
                 child: Text(
                   'Ошибка: ${snapshot.error}',
-                  style: const TextStyle(color: Colors.redAccent),
+                  style: const TextStyle(color: AppTheme.redAccent),
                 ),
               );
             }

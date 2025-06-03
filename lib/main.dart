@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pc_shop/auth/service/auth_gate.dart';
+import 'package:pc_shop/auth/auth_service/auth_gate.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

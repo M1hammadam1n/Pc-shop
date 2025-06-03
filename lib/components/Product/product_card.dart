@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pc_shop/auth/service/product.dart';
-import 'package:pc_shop/page/Product/Product_Detail_Page.dart';
+import 'package:pc_shop/components/Product/Product_Detail_Page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:pc_shop/service/product.dart';
+import 'package:pc_shop/theme/app_theme.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -30,12 +31,12 @@ class ProductCard extends StatelessWidget {
       ),
       child: Card(
         margin: const EdgeInsets.all(8),
-        color: const Color(0xFF121212), // немного светлее
-        elevation: 4, // тень для выделения
+        color: AppTheme.black70,
+        elevation: 4, 
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: const BorderSide(
-            color: Color(0xFF1E1E1E), // тонкая граница
+            color: AppTheme.black80,
             width: 1,
           ),
         ),
@@ -46,7 +47,7 @@ class ProductCard extends StatelessWidget {
             children: [
               Text(
                 'ID: ${product.id}',
-                style: TextStyle(color: Colors.white, fontSize: idFontSize),
+                style: TextStyle(color: AppTheme.white, fontSize: idFontSize),
               ),
               SizedBox(height: screenWidth * 0.02),
               CachedNetworkImage(
@@ -55,16 +56,16 @@ class ProductCard extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
+                  child: CircularProgressIndicator(color: AppTheme.white),
                 ),
                 errorWidget: (context, url, error) =>
-                    const Icon(Icons.error, color: Colors.red),
+                    const Icon(Icons.error, color: AppTheme.red),
               ),
               SizedBox(height: screenWidth * 0.02),
               Text(
                 product.title,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppTheme.white,
                   fontSize: titleFontSize,
                   fontWeight: FontWeight.bold,
                 ),
@@ -72,7 +73,7 @@ class ProductCard extends StatelessWidget {
               Text(
                 product.price,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppTheme.white,
                   fontSize: priceFontSize,
                   fontWeight: FontWeight.bold,
                 ),
@@ -83,7 +84,7 @@ class ProductCard extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppTheme.white,
                   fontSize: descriptionFontSize,
                 ),
               ),

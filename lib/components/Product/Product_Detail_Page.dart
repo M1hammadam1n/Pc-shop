@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pc_shop/auth/service/product.dart';
-import 'package:pc_shop/page/Call_Button.dart';
+import 'package:pc_shop/components/Call_Button.dart';
+import 'package:pc_shop/service/product.dart';
+import 'package:pc_shop/theme/app_theme.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final Product product;
@@ -14,17 +15,17 @@ class ProductDetailPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF121212), // тот же цвет, что и в SearchPage
+        backgroundColor: const Color(0xFF121212),
         iconTheme: const IconThemeData(
-          color: Colors.purpleAccent, // акцентный цвет для иконок
+          color: AppTheme.purpleAccent,
         ),
         title: Text(
           product.title,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: AppTheme.white),
         ),
         elevation: 0,
       ),
-      backgroundColor: const Color(0xFF121212), // фон страницы темный, как и раньше
+      backgroundColor: AppTheme.black70,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
@@ -36,7 +37,7 @@ class ProductDetailPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.purpleAccent.withOpacity(0.5),
+                      color: AppTheme.purpleAccent.withOpacity(0.5),
                       offset: const Offset(0, 4),
                       blurRadius: 12,
                     ),
@@ -50,11 +51,11 @@ class ProductDetailPage extends StatelessWidget {
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => Container(
                     height: 250,
-                    color: const Color(0xFF2A2A2A), // темный фон для ошибки картинки
+                    color: AppTheme.gray,
                     child: const Icon(
                       Icons.broken_image,
                       size: 60,
-                      color: Colors.white30,
+                      color: AppTheme.White30,
                     ),
                   ),
                 ),
@@ -65,16 +66,16 @@ class ProductDetailPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: AppTheme.white,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                '${product.price} сум', // добавил валюту для консистентности
+                '${product.price} сум',
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purpleAccent, // акцентный цвет для цены
+                  color: AppTheme.purpleAccent,
                 ),
               ),
               const SizedBox(height: 12),
@@ -82,7 +83,7 @@ class ProductDetailPage extends StatelessWidget {
                 product.description,
                 style: const TextStyle(
                   fontSize: 16,
-                  color: Colors.white70,
+                  color: AppTheme.white70,
                 ),
               ),
               const SizedBox(height: 24),
